@@ -1,0 +1,2 @@
+# urlQrcode
+根据当前前台页面的url地址生成QRcode方便扫码访问
