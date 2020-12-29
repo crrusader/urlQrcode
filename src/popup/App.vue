@@ -25,8 +25,8 @@ export default {
   methods: {
     init() {
       this.QRcode = new QRCode("qrcode", {
-        width: 160,
-        height: 160, // 高度
+        width: 200,
+        height: 200, // 高度
         text: this.qrcode, // 二维码内容
       });
     },
