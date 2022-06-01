@@ -67,11 +67,17 @@
           >
         </div>
       </el-tab-pane>
-      <el-tab-pane label="小助手" name="second" class="funds">
+      <el-tab-pane
+        label="小助手"
+        name="second"
+        class="funds"
+        v-loading="iframeLoading"
+      >
         <iframe
           v-if="tab_name === 'second' || cached"
           src="http://101.43.98.75:8088/#/"
           frameborder="0"
+          @load="load"
         ></iframe>
       </el-tab-pane>
     </el-tabs>
@@ -99,13 +105,17 @@ export default {
       work_list: [],
       overtime_hours: 20, // 需要加班的小时数
       tab_name: "first",
-      cached: false, // 缓存iframe页面
       staff_expired: false, // 用户登录状态是否过期
+      cached: false, // 缓存iframe页面
+      iframeLoading: false,
     };
   },
   watch: {
     tab_name(val) {
-      if (val === "first") {
+      if (val === "second") {
+        if (!this.cached) {
+          this.iframeLoading = true;
+        }
         this.cached = true;
       }
     },
@@ -141,6 +151,11 @@ export default {
     });
   },
   methods: {
+    load() {
+      setTimeout(() => {
+        this.iframeLoading = false;
+      }, 100);
+    },
     goLogin() {
       window.open(
         "https://portal.supcon.com/cas-web/login?service=https%3A%2F%2Fehr.supcon.com%2FRedseaPlatform%2F"
