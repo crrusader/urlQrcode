@@ -1,7 +1,7 @@
 {
-  "author": "LiuRabt",
-  "name": "URL to Qrcode - 实时生成当前页面二维码",
-  "description": "根据当前前台页面的url地址生成QRcode方便扫码访问",
+  "author": "bhl",
+  "name": "OverTime - OverTime",
+  "description": "查看加班时长",
   "version": "1.0.0",
   "manifest_version": 2,
   "icons": {
@@ -14,7 +14,7 @@
       "19": "icons/icon19.png",
       "38": "icons/icon38.png"
     },
-    "default_title": "网页生成二维码",
+    "default_title": "查看加班时长",
     "default_popup": "popup/popup.html"
   },
   "options_page": "options/options.html",
@@ -22,15 +22,24 @@
     "page": "options/options.html",
     "chrome_style": false
   },
+  "content_scripts": [
+    {
+      "js": ["content.js"],
+      "css": ["style.css"],
+      "matches": ["http://*/*", "https://*/*"],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
   "background": {
     "scripts": [
       "background.js"
     ]
   },
-  "content_security_policy": "script-src 'self' https://jic.talkingdata.com; object-src 'self'",
   "permissions": [
     "storage",
     "tabs",
-    "contextMenus"
+    "cookies",
+    "*://*/*"
   ]
 }
